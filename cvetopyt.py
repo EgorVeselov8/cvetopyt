@@ -1,14 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response
 import requests
 from bs4 import BeautifulSoup
 import re
 from urllib.parse import urlparse, urljoin
 from collections import Counter
+import json
 
 app = Flask(__name__)
 
 def standardize_color(color):
-    if len(color) == 4:
+    if len(color) == 4:  
         return "#" + color[1] * 2 + color[2] * 2 + color[3] * 2
     return color.lower()
 
@@ -83,9 +84,9 @@ def get_website_colors():
     website_url = request.args.get("url")
     if website_url and is_valid_url(website_url):
         colors = find_colors_on_website(website_url)
-        return jsonify(colors)
+        return Response(json.dumps(colors), mimetype='application/json')
     else:
-        return jsonify({"error": "Invalid url"}), 400
+        return Response(json.dumps({"error": "Invalid url"}), mimetype='application/json', status=400)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

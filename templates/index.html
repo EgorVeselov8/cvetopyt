@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Цветопыт</title>
+	<style>
+		body {
+    		font-family: Arial, sans-serif;
+			margin: 0;
+		}
+		.main{
+            margin: 80px 40px;
+            display: flex;
+            flex-direction: column;
+		}
+		form {
+			display: flex;
+			margin: 0 0 10px;
+		}
+		.form {
+			margin: 0 0 140px;
+		}
+		input[type="text"]{
+			flex: 1;
+			padding: 20px 30px;
+			border-radius: 40px;
+/*			background-color: #f2f2f2;*/
+			border: none;
+			box-shadow: 0px 50px 250px 50px rgba(255,0,255,0.5),
+						0px 5px 100px 5px rgba(255,0,255,0.5); 
+        }
+		input[type="text"]:focus {
+            outline: none;
+        }
+		input[placeholder="Ссылка на сайт"]{
+			font-size: 4.5rem;
+        }
+		 input::placeholder {
+           color: #A3A3A3;
+        }
+		footer {
+			position: fixed;
+		  bottom: 0;
+		  left: 0;
+		  width: 100%;
+		  box-sizing: border-box;
+		  padding: 20px 40px;
+		}
+		.footer_container {
+			text-align: right;
+		}
+		h3 {
+			font-weight: bold;
+			font-size: 1rem;
+			line-height: 1;
+			margin: 0 0 10px;
+		}
+		h2 {
+			font-weight: 400;
+			font-size: 1.6rem;
+			line-height: 1;
+			margin: 0 0 20px;
+		}
+		p {
+			font-size: 1rem;
+			margin: 0;
+			line-height: 1.4;
+		}
+    </style>
+<!--
+	<script>
+		window.onload = function (){
+			let form = document.getElementsByTagName('input')[0];
+			let hue = Math.floor(Math.random() * 361);
+			let saturation = Math.floor(Math.random() * 101);
+			let lightness = Math.floor(Math.random() * 101);
+
+			form.style.boxShadow = `0px 50px 250px 50px hsla(${hue},${saturation}%,${lightness}%,0.5),
+									0px 5px 100px 5px hsla(${hue},${saturation}%,${lightness}%,0.5)`;
+		}
+	</script>
+-->
+</head>
+<body>
+	<div class="main">
+		<div class="form">
+			<form method="POST">
+				<input type="text" name="url" placeholder="Ссылка на сайт" value="{{ url }}" required>
+			</form>
+			<p>Вставьте ссылку на сайт, чтобы узнать какие цвета на нём используются</p>
+		</div>
+		{% for color in colors %}
+        <h2>{{color.0}}: {{color.1}}</h2>
+    	{% endfor %}
+	</div>
+	<footer>
+	        <div class="footer_container">
+				<h3>Цветопыт</h3>
+        		<p>Сделал <a href="https://egorveselov.ru/">Егор Веселов</a> <br>
+        		с помощью ЧатЖПТ4</p>
+            </div>
+    </footer>
+</body>
+</html>
